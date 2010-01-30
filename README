@@ -1,0 +1,39 @@
+######################
+### What is it ??? ###
+######################
+
+hobbit-samba.sh is a Samba (SMB) servers and shares monitoring plugin for Hoobitmon/Xymon (http://hobbitmon.sourceforge.net/).
+It's checks for status of defined Samba servers and shares.
+It's fully GPL, so you can do whatever you want with, but it will keep GPL for ever.
+
+#####################################
+### What are the pre-requisites ? ###
+#####################################
+
+You first need to have a Hobbitmon/Xymon server running. This script is client-side script, so it must be installed by a Hobbitmon/Xymon client.
+It uses smbclient and smbtree commands, easily available on most Linux based OS (most of the time in a samba-client package)
+You need a valid Samba account on servers wich you want test the shares.
+
+You need to define path to smbtree and smbclient commands :
+SMBCLIENT="/usr/bin/smbclient"
+SMBTREE="/usr/bin/smbtree"
+
+Those values are correct on a Debian system.
+
+You also need to edit hobbit-samba.conf file, where samba servers, shares, usernames and passwords are set. This file is also used to tell if hobbit-samba.sh needs to reports undefined (hence unauthorised) Samba shares and alert level for it.
+
+###########################
+### How does it works ? ###
+###########################
+
+The script will try to connect to defined samba shares on defined samba servers. It also can control if any unauthorized samba server is running on same subnet (SMB scans uses broadcast address).
+Then it reports those results to monitoring server.
+
+####################################
+### How could I check activity ? ###
+####################################
+
+There is a debug mode included, you just have to run :
+hobbit-samba.sh debug
+
+And you'll have the reports sent to monitoring server.
